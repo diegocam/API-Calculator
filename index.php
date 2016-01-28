@@ -1,5 +1,5 @@
 <?php
-$url = 'http://localhost/test/jquery/stan/api/mmmr'; //this changes according to your environment
+$url = 'http://localhost/api/mmmr'; //this changes according to your environment
 
 $json = '{"numbers":[1,23,2,3,4]}';
 
