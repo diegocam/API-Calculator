@@ -1,5 +1,6 @@
 <?php
-$url = 'http://localhost/api/process'; //this changes according to your environment
+header('Content-Type: application/json');
+$url = 'http://localhost/api/process.php'; //this changes according to your environment
 
 $json = '{"numbers":[1,23,2,3,4]}';
 
