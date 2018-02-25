@@ -25,8 +25,7 @@ class Calculate
     public function response()
     {
         try {
-            $good_json = $this->json_format();
-            if (!$good_json) {
+            if (!$this->checkJson()) {
                 throw new Exception('Problem with JSON format');
             }
             $response = array(
@@ -51,16 +50,13 @@ class Calculate
     /**
      * @return bool
      */
-    private function json_format()
+    private function checkJson()
     {
         $obj = json_decode($this->numbers);
-        if ($obj) {
+        if ($is_good = is_object($obj)) {
             $this->numbers = $obj->numbers;
-            $result = true;
-        } else {
-            $result = false;
         }
-        return $result;
+        return $is_good;
     }
 
     /**
