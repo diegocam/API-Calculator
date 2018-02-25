@@ -8,15 +8,15 @@ class Calculate
     /**
      * @var
      */
-    private $numbers;
+    private $json;
 
     /**
      * Calculate constructor.
      * @param $numbers
      */
-    public function __construct($numbers)
+    public function __construct($json)
     {
-        $this->numbers = $numbers;
+        $this->json = $json;
     }
 
     /**
@@ -52,11 +52,8 @@ class Calculate
      */
     private function checkJson()
     {
-        $obj = json_decode($this->numbers);
-        if ($is_good = is_object($obj)) {
-            $this->numbers = $obj->numbers;
-        }
-        return $is_good;
+        $this->json = json_decode($this->json);
+        return is_object($this->json) && $this->json->numbers;
     }
 
     /**
@@ -64,9 +61,9 @@ class Calculate
      */
     private function get_mean()
     {
-        if (!empty($this->numbers)) {
-            $count = count($this->numbers);
-            $sum = array_sum($this->numbers);
+        if (!empty($this->json->numbers)) {
+            $count = count($this->json->numbers);
+            $sum = array_sum($this->json->numbers);
             $result = $sum / $count;
             $result = round($result, 3);
         } else {
@@ -80,16 +77,16 @@ class Calculate
      */
     private function get_median()
     {
-        if (!empty($this->numbers)) {
-            sort($this->numbers);
-            $count = count($this->numbers);
+        if (!empty($this->json->numbers)) {
+            sort($this->json->numbers);
+            $count = count($this->json->numbers);
             $mid = floor(($count - 1) / 2);
             if ($count % 2 == 0) { // even
-                $low = $this->numbers[$mid];
-                $high = $this->numbers[$mid + 1];
+                $low = $this->json->numbers[$mid];
+                $high = $this->json->numbers[$mid + 1];
                 $median = (($low + $high) / 2);
             } else { // odd
-                $median = $this->numbers[$mid];
+                $median = $this->json->numbers[$mid];
             }
             return $median;
         } else {
@@ -103,8 +100,8 @@ class Calculate
      */
     private function get_mode()
     {
-        if (!empty($this->numbers)) {
-            $values = array_count_values($this->numbers);
+        if (!empty($this->json->numbers)) {
+            $values = array_count_values($this->json->numbers);
             $max_value = max($values);
             $result = array_search($max_value, $values);
         } else {
@@ -119,9 +116,9 @@ class Calculate
      */
     private function get_range()
     {
-        if (!empty($this->numbers)) {
-            $min = min($this->numbers);
-            $max = max($this->numbers);
+        if (!empty($this->json->numbers)) {
+            $min = min($this->json->numbers);
+            $max = max($this->json->numbers);
             $result = $max - $min;
         } else {
             $result = NULL;
