@@ -1,6 +1,6 @@
 # Calculator API Project
 
-I created this API simply for testing and practice.
+I created this API simply for testing and practice. It calculates the `Mean`, `Median`, `Mode`, `Range` of a given set of numbers.
  
 In order to test, you can use the `index.php` file and modify the JSON (string in this case, could have been an array through json_encode, but this shows support for strings).
 
@@ -11,14 +11,10 @@ which removes the .php extension. The mmmr.php then checks if its a POST request
 Sample JSON Request
 ```
 POST {base_URL}/api/process.php
- Request body:
+
+  Request body:
   {
-    'snippet': {
-      'resourceId': {
-        'kind': 'youtube#channel',
-        'channelId': 'UC_x5XG1OV2P6uZZ5FSM9Ttw' 
-       }
-     }
+    'numbers': [1,23,2,3,4]
   }
 ```
 Sample JSON Response
