@@ -1,13 +1,29 @@
 <?php
 
-class Calculate {
+/**
+ * Class Calculate
+ */
+class Calculate
+{
+    /**
+     * @var
+     */
     private $numbers;
 
-    public function __construct($numbers) {
+    /**
+     * Calculate constructor.
+     * @param $numbers
+     */
+    public function __construct($numbers)
+    {
         $this->numbers = $numbers;
     }
 
-    public function response() {
+    /**
+     * @return array
+     */
+    public function response()
+    {
         try {
             $good_json = $this->json_format();
             if (!$good_json) {
@@ -32,7 +48,11 @@ class Calculate {
         return $response;
     }
 
-    private function json_format() {
+    /**
+     * @return bool
+     */
+    private function json_format()
+    {
         $obj = json_decode($this->numbers);
         if ($obj) {
             $this->numbers = $obj->numbers;
@@ -43,7 +63,11 @@ class Calculate {
         return $result;
     }
 
-    private function get_mean() {
+    /**
+     * @return float|int|null
+     */
+    private function get_mean()
+    {
         if (!empty($this->numbers)) {
             $count = count($this->numbers);
             $sum = array_sum($this->numbers);
@@ -55,7 +79,11 @@ class Calculate {
         return $result;
     }
 
-    private function get_median() {
+    /**
+     * @return float|int|null
+     */
+    private function get_median()
+    {
         if (!empty($this->numbers)) {
             sort($this->numbers);
             $count = count($this->numbers);
@@ -74,7 +102,11 @@ class Calculate {
         return $result;
     }
 
-    private function get_mode() {
+    /**
+     * @return false|int|null|string
+     */
+    private function get_mode()
+    {
         if (!empty($this->numbers)) {
             $values = array_count_values($this->numbers);
             $max_value = max($values);
@@ -86,7 +118,11 @@ class Calculate {
         return $result;
     }
 
-    private function get_range() {
+    /**
+     * @return mixed|null
+     */
+    private function get_range()
+    {
         if (!empty($this->numbers)) {
             $min = min($this->numbers);
             $max = max($this->numbers);
